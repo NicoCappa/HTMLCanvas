@@ -32,7 +32,7 @@
     };
 
 
-    window.onload = animating_arcs();
+    window.onload = animation();
 
 
     /// Canvas Functions ///
@@ -104,32 +104,40 @@
     }
 
     /// Animating ///
-    function animating_arcs(){
+    function animation(){
 
         var c = canvas.getContext("2d");
-
+        
+        // The array that will hold our cirlces 
         var circleArray = [];
+        
+        // For loop that creats specified amount of circles 
         for(var i = 0; i < 5; i++) {
             var radius = 30;
+            
+            // Creates a random X and Y position for our circles
             var newArcX = Math.random() * (innerWidth - radius * 2) + radius;
             var newArcY = Math.random() * (innerHeight - radius * 2) + radius;
-
+            
+            // Creates a circle and adds it to the array
             circleArray.push(new Circle(newArcX, newArcY, radius));
         }
 
         // Function that holds the animation, essentially animation is just refreshing the page a bunch of times
         function animate(){
             requestAnimationFrame(animate);
+            
             //Clears the entire CanvasJS so circles don't stay when re-drawn
             c.clearRect(0, 0, innerWidth, innerHeight);
 
-            // Updates every circle in the circleArray
+            // Calls the update function for every circle in our circle array
             circleArray.forEach(function(circle){
                     circle.update();
             });
 
         }
-
+        
+        // Calls the animate function so it can start 
         animate();
 
     }
