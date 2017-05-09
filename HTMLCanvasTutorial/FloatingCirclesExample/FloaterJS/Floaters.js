@@ -9,6 +9,7 @@ likely documented in the BasicFunctions Folder
 var canvas = document.getElementById("floaterCanvas");
 var c = canvas.getContext("2d");
 
+
 resize();
 window.onresize = function() {
         resize();
@@ -25,10 +26,25 @@ window.onload = draw();
 
 
 /// Draw function /// 
-
-
 function draw(){
     
+    var backgroundCircleList = [];
+    for(var i = 0; i < 800; i++){
+        backgroundCircleList.push(new BackgroundCircle());
+        
+    }
     
+    // Animate
+    function animate(){
+        requestAnimationFrame(animate);
+        c.clearRect(0, 0, innerWidth, innerHeight);
+        
+        backgroundCircleList.forEach(function(bCircle){
+            bCircle.update();
+        });
+        
+    }
+    
+    animate();
     
 }
